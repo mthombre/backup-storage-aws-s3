@@ -5,5 +5,5 @@ terraform {
     key            = "infra/terraform.tfstate"
     region         = "ap-southeast-2"
     dynamodb_table = "817734494987-backup-storage-aws-s3"
-    }
+  }
 }

@@ -18,9 +18,9 @@ resource "aws_s3_bucket" "mybucket" {
 
 resource "aws_s3_bucket_lifecycle_configuration" "glacier" {
   bucket = aws_s3_bucket.mybucket.id
-  
+
   rule {
-    id = "glacier-1" # Move to glacier deep archive after 10 days from original upload
+    id = "glacier-1" # Move to glacier after 10 days from original upload
     filter {}
 
     status = "Enabled"
@@ -29,7 +29,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "glacier" {
       days          = 10
       storage_class = "GLACIER"
     }
-  }
 
-  
+    transition {
+      days          = 180
+      storage_class = "DEEP_ARCHIVE" # Move to glacier deep archive after 180 days from original upload
+    }
+  }
 }
