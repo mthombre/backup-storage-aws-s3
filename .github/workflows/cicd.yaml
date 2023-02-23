@@ -29,15 +29,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-
+      - name: Terraform plan
+        run: make plan
         
-      # - name: Terraform plan
-      #   run: make plan
-        
-      # - name: Terraform deployment
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   run: make deploy
+      - name: Terraform deployment
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: make deploy
 
-      # - name: Terraform destroy
-      #   if: github.ref == 'refs/heads/destroy' && github.event_name == 'push'
-      #   run: make destroy
+      - name: Terraform destroy
+        if: github.ref == 'refs/heads/destroy' && github.event_name == 'push'
+        run: make destroy
