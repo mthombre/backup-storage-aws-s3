@@ -1,4 +1,5 @@
 plan:
+	terraform init
 	terraform plan
 
 deploy:
